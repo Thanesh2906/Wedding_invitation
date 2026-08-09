@@ -20,8 +20,8 @@ button, a { -webkit-tap-highlight-color:transparent; }
 .ornament { color:var(--gold-light); font-size:32px; text-shadow:0 0 26px rgba(234,213,162,.75); }
 .hero-kicker,.eyebrow { margin:18px 0; font:600 10px/1.7 var(--font-sans); text-transform:uppercase; letter-spacing:.32em; }
 .hero-kicker { color:var(--gold-light); }
-.monogram { width:78px; height:78px; display:grid; place-items:center; border:1px solid rgba(234,213,162,.55); border-radius:50%; margin:22px 0 30px; color:var(--gold-light); font-size:28px; letter-spacing:.06em; transform:rotate(-3deg); }
-.monogram span { font:20px var(--font-script); margin:0 2px; }
+.monogram { width:78px; height:78px; display:flex; align-items:center; justify-content:center; flex-wrap:nowrap; white-space:nowrap; border:1px solid rgba(234,213,162,.55); border-radius:50%; margin:22px 0 30px; color:var(--gold-light); font-size:27px; line-height:1; letter-spacing:0; transform:rotate(-3deg); }
+.monogram span { display:inline-block; flex:0 0 auto; font:20px/1 var(--font-script); margin:0 3px; }
 .hero h1 { margin:0; display:flex; flex-direction:column; align-items:center; font:400 clamp(68px,14vw,138px)/.72 var(--font-script); text-shadow:0 8px 38px rgba(14,0,6,.28); }
 .hero h1 em { margin:18px 0 13px; color:var(--gold-light); font:400 34px/1 var(--font-serif); }
 .hero-date { margin:44px 0 0; color:var(--gold-light); font:600 13px var(--font-sans); letter-spacing:.34em; text-transform:uppercase; }
