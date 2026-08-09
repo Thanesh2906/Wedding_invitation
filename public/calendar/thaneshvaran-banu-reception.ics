@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Thaneshvaran and Banu//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:reception-20261121@thaneshvaran-banu
+DTSTAMP:20260809T000000Z
+DTSTART:20261121T113100Z
+DTEND:20261121T150000Z
+SUMMARY:Thaneshvaran & Banu — Wedding Reception
+DESCRIPTION:Wedding Reception on behalf of Bride's Family.
+LOCATION:Dewan Mariamman Amman Temple Kalidonia\, Nibong Tebal\, Pulau Pinang (Mainland)
+BEGIN:VALARM
+TRIGGER:-P3D
+ACTION:DISPLAY
+DESCRIPTION:Thaneshvaran & Banu's wedding reception is in 3 days
+END:VALARM
+END:VEVENT
+END:VCALENDAR
