@@ -47,5 +47,36 @@
   "contacts": {
     "groomSide": ["016-757 5907", "017-891 2429"],
     "brideSide": ["011-5310 5942", "010-460 4503"]
+  },
+  "hashtag": "#ThaneshAndBanu2026",
+  "music": {
+    "src": "/audio/wedding-veena.mp3",
+    "title": "Veena Alapana in Raga Kīravāṇi",
+    "credit": "L. Ramakrishnan, recorded 2004 — archive.org/details/LR_kIravANI (CC0, public domain)"
+  },
+  "gallery": {
+    "sectionId": "gallery",
+    "kicker": "A few of our favourites",
+    "heading": "Our Moments",
+    "subheading": "A little glimpse into our journey together.",
+    "photos": [
+      { "src": "/gallery/01.jpg", "alt": "Thaneshvaran and Banu" },
+      { "src": "/gallery/02.jpg", "alt": "Thaneshvaran and Banu" },
+      { "src": "/gallery/03.jpg", "alt": "Thaneshvaran and Banu" },
+      { "src": "/gallery/04.jpg", "alt": "Thaneshvaran and Banu" },
+      { "src": "/gallery/05.jpg", "alt": "Thaneshvaran and Banu" },
+      { "src": "/gallery/06.jpg", "alt": "Thaneshvaran and Banu" }
+    ]
+  },
+  "thingsToKnow": {
+    "sectionId": "know",
+    "kicker": "Before you arrive",
+    "heading": "Good to Know",
+    "items": [
+      { "title": "Dress code", "body": "Festive traditional or smart formal attire is most welcome — feel free to shine in your favourite colours." },
+      { "title": "RSVP", "body": "Kindly RSVP at your earliest by messaging either side on WhatsApp, so we can prepare a seat just for you." },
+      { "title": "Kids & plus-ones", "body": "Bringing your little ones or a plus-one? Just let us know beforehand so we can plan seating with you in mind." },
+      { "title": "Parking", "body": "Parking is available at the venue — do plan to arrive a little early so we can start the celebrations together." }
+    ]
   }
 }
