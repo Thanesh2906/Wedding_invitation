@@ -359,22 +359,10 @@ export default function Home() {
         <div className="events-grid"><EventCard eventKey="wedding" index={0} /><EventCard eventKey="reception" index={1} /></div>
       </section>
 
-      <Reveal className="quick-links"><p className="eyebrow">Choose your destination</p><div aria-label="Event navigation"><MotionButton className="" href="#wedding">Wedding</MotionButton><MotionButton className="" href="#reception">Dinner</MotionButton></div></Reveal>
-
-      <section className="families-section">
-        <Reveal className="section-heading"><p className="eyebrow">With blessings from</p><h2>Our Families</h2></Reveal>
-        <div className="family-grid">{(["groom", "bride"] as const).map((side, index) => <motion.article className="family-card" key={side} initial={{ opacity: 0, y: 35 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewport} transition={{ duration: 0.7, delay: index * 0.12 }} whileHover={{ y: -5 }}><p className="eyebrow">{side === "groom" ? "Groom’s family" : "Bride’s family"}</p><h3>{wedding.families[side].parents[0]}<br />{wedding.families[side].parents[1]}</h3><address>{wedding.families[side].addressLines.map((line) => <span key={line}>{line}<br /></span>)}</address></motion.article>)}</div>
-      </section>
-
       {wedding.gallery.enabled && <section className="gallery-section" id={wedding.gallery.sectionId}>
         <Reveal className="section-heading"><p className="eyebrow">{wedding.gallery.kicker}</p><h2>{wedding.gallery.heading}</h2><p>{wedding.gallery.subheading}</p></Reveal>
         <div className="gallery-grid">{wedding.gallery.photos.map((photo, index) => <GalleryFrame key={photo.src} src={photo.src} alt={photo.alt} index={index} />)}</div>
       </section>}
-
-      <section className="info-section" id={wedding.thingsToKnow.sectionId}>
-        <Reveal className="section-heading"><p className="eyebrow">{wedding.thingsToKnow.kicker}</p><h2>{wedding.thingsToKnow.heading}</h2></Reveal>
-        <div className="info-grid">{wedding.thingsToKnow.items.map((item, index) => <motion.div className="info-card" key={item.title} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewport} transition={{ duration: 0.65, delay: (index % 4) * 0.1 }} whileHover={{ y: -4 }}><h3>{item.title}</h3><p>{item.body}</p></motion.div>)}</div>
-      </section>
 
       <section className="contact-section" id="contact">
         <Reveal className="section-heading"><p className="eyebrow">We would love to hear from you</p><h2>RSVP &amp; Contact</h2></Reveal>
