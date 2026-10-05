@@ -25,3 +25,5 @@ USER-SUPPLIED IMAGES
 Opening: Golden Temple Aisle at Dusk(1).png, supplied by the user; converted to WebP for web delivery.
 Wedding location: unnamed.webp, supplied by the user.
 These supplied assets replace the previously displayed entrance and wedding-card images.
+
+Name-section background: Opulent South Indian Temple Wedding Mandap(1).png, supplied by the user; converted to WebP for web delivery.

@@ -309,7 +309,8 @@ export default function Home() {
       </motion.nav>
 
       <header key={opening ? "revealed" : "waiting"} className="hero" id="top">
-        <ParallaxImage className="hero-floral" src="/images/lotus.jpg" />
+        <ParallaxImage className="hero-floral" src="/images/mandap-background.webp" />
+        <div className="hero-copy">
         <motion.div className="hero-glow hero-glow-one" animate={reduceMotion ? undefined : { x: [0, 24, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
         <motion.div className="hero-glow hero-glow-two" animate={reduceMotion ? undefined : { x: [0, -22, 0], y: [0, -24, 0], scale: [1, 1.08, 1] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} />
         <CornerFlourish side="left" />
@@ -325,6 +326,7 @@ export default function Home() {
         <motion.p className="hero-date" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.45, duration: 0.8 }}>{wedding.events.wedding.shortDate}</motion.p>
         <motion.p className="hero-venue" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6, duration: 0.8 }}>{wedding.events.wedding.venue} · Johor Bahru</motion.p>
         <motion.a href="#invitation" className="scroll-cue" aria-label="Read the invitation" initial={{ opacity: 0 }} animate={{ opacity: 0.8 }} transition={{ delay: 1.9 }} whileHover={{ opacity: 1 }}><span>With love, we invite you</span><motion.i animate={reduceMotion ? undefined : { y: [0, 6, 0] }} transition={{ duration: 1.8, repeat: Infinity }}>↓</motion.i></motion.a>
+        </div>
       </header>
 
       <section className="invitation paper-section" id="invitation">
