@@ -20,3 +20,8 @@ Author: Dsudhakar555
 Source: https://commons.wikimedia.org/wiki/File:Sripuram_Temple_Full_View.jpg
 License: Public domain, released by the author.
 Adaptation: compressed and displayed cropped.
+
+USER-SUPPLIED IMAGES
+Opening: Golden Temple Aisle at Dusk(1).png, supplied by the user; converted to WebP for web delivery.
+Wedding location: unnamed.webp, supplied by the user.
+These supplied assets replace the previously displayed entrance and wedding-card images.

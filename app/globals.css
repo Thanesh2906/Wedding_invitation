@@ -231,7 +231,7 @@ footer>p { font-size:14px; line-height:1.6; }
 .entrance { position:fixed; inset:0; z-index:100; perspective:1400px; min-height:100svh; }
 .entrance-image { animation:entrance-breathe 12s ease-in-out infinite alternate; }
 .entrance-doors { position:absolute; inset:0; z-index:-1; perspective:1200px; overflow:hidden; }
-.entrance-door { position:absolute; top:0; bottom:0; width:50%; background-image:linear-gradient(#21150840,#21150890),url('/images/temple.jpg'); background-size:200% 100%; background-repeat:no-repeat; filter:sepia(.6) saturate(.65); transition:transform 1.4s cubic-bezier(.65,0,.2,1),filter 1.4s; will-change:transform; backface-visibility:hidden; }
+.entrance-door { position:absolute; top:0; bottom:0; width:50%; background-image:linear-gradient(#21150840,#21150890),url('/images/temple-opening.webp'); background-size:200% 100%; background-repeat:no-repeat; filter:sepia(.6) saturate(.65); transition:transform 1.4s cubic-bezier(.65,0,.2,1),filter 1.4s; will-change:transform; backface-visibility:hidden; }
 .entrance-door-left { left:0; background-position:left center; transform-origin:left center; border-right:1px solid #f1dca870; }
 .entrance-door-right { right:0; background-position:right center; transform-origin:right center; border-left:1px solid #f1dca870; }
 .entrance-opening .entrance-door-left { transform:translateX(-100%) rotateY(-15deg); }
@@ -262,3 +262,10 @@ footer>p { font-size:14px; line-height:1.6; }
 @media (prefers-reduced-motion:reduce) {
   .entrance-door,.entrance-image,.entrance-shade,.event-image { transition:none!important; animation:none!important; }
 }
+
+/* User-supplied opening artwork and wedding hall. */
+.entrance-image,.entrance-door { filter:none; }
+.entrance-shade { background:linear-gradient(180deg,#130d0740,#130d0780 50%,#130d0730); }
+.entrance-frame { background:#21150945; }
+.event-card-ivory { border-radius:18px; padding-top:56px; }
+.event-image { object-position:center; }

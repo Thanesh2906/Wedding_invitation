@@ -73,7 +73,7 @@ function EventCard({ eventKey, index }: { eventKey: EventKey; index: number }) {
       whileHover={{ y: -7 }}
     >
       <motion.div className="event-number" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 0.06, x: 0 }} viewport={viewport}>0{isWedding ? "1" : "2"}</motion.div>
-      <img className="event-image" src={isWedding ? "/images/golden-temple.jpg" : "/images/lotus.jpg"} alt="" loading="lazy" />
+      {isWedding && <img className="event-image" src="/images/wedding-location.webp" alt="Floral wedding hall with decorated dining tables" loading="lazy" />}
       <p className="eyebrow">{event.kicker}</p>
       <h2>{event.heading}</h2>
       {event.subheading && <p className="event-subheading">{event.subheading}</p>}
@@ -276,7 +276,7 @@ export default function Home() {
           requestAnimationFrame(() => invitationRef.current?.focus({ preventScroll: true }));
         }}>
         <div className="entrance-doors" aria-hidden="true"><div className="entrance-door entrance-door-left" /><div className="entrance-door entrance-door-right" /></div>
-        <img className="entrance-image" src="/images/temple.jpg" alt="" fetchPriority="high" />
+        <img className="entrance-image" src="/images/temple-opening.webp" alt="" fetchPriority="high" />
         <div className="entrance-shade" />
         <motion.div className="entrance-frame" initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: opening ? 0 : 1, y: opening ? -20 : 0 }}
