@@ -226,3 +226,39 @@ footer>p { font-size:14px; line-height:1.6; }
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
 }
+
+/* Reference motion: a temple entrance unfolds before the invitation begins. */
+.entrance { position:fixed; inset:0; z-index:100; perspective:1400px; min-height:100svh; }
+.entrance-image { animation:entrance-breathe 12s ease-in-out infinite alternate; }
+.entrance-doors { position:absolute; inset:0; z-index:-1; perspective:1200px; overflow:hidden; }
+.entrance-door { position:absolute; top:0; bottom:0; width:50%; background-image:linear-gradient(#21150840,#21150890),url('/images/temple.jpg'); background-size:200% 100%; background-repeat:no-repeat; filter:sepia(.6) saturate(.65); transition:transform 1.4s cubic-bezier(.65,0,.2,1),filter 1.4s; will-change:transform; backface-visibility:hidden; }
+.entrance-door-left { left:0; background-position:left center; transform-origin:left center; border-right:1px solid #f1dca870; }
+.entrance-door-right { right:0; background-position:right center; transform-origin:right center; border-left:1px solid #f1dca870; }
+.entrance-opening .entrance-door-left { transform:translateX(-100%) rotateY(-15deg); }
+.entrance-opening .entrance-door-right { transform:translateX(100%) rotateY(15deg); }
+.entrance-opening .entrance-image { opacity:0; transform:scale(1.16); transition:opacity 1s,transform 1.4s; animation:none; }
+.entrance-opening .entrance-shade { opacity:0; transition:opacity 1.2s; }
+.entrance-frame { z-index:1; }
+.open-invitation { position:relative; overflow:hidden; animation:invitation-pulse 3s ease-in-out infinite; }
+.open-invitation::after { content:""; position:absolute; inset:-60% auto -60% -60%; width:35%; background:linear-gradient(90deg,transparent,#ffffff80,transparent); transform:skewX(-25deg); animation:gold-shine 4s ease-in-out infinite; pointer-events:none; }
+.open-invitation:disabled { cursor:wait; animation:none; }
+.invitation-content { min-height:100svh; }
+.invitation-content:not(.invitation-active) { visibility:hidden; }
+.invitation-active .hero-floral { animation:floral-drift 12s ease-in-out infinite alternate; }
+.events-grid { perspective:1400px; }
+.event-card { transform-style:preserve-3d; }
+.event-image { transition:filter .6s,scale .9s; }
+.event-card:hover .event-image { scale:1.025; filter:brightness(1.08); }
+.is-revealed { animation:reveal-glow 1.1s ease-out; }
+.is-revealed .scratch-date strong { animation:date-emerge .8s cubic-bezier(.22,1,.36,1); }
+.gallery-grid { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; padding:20px max(20px,calc((100vw - 1080px)/2)); max-width:none; -webkit-overflow-scrolling:touch; }
+.gallery-frame { flex:0 0 min(74vw,360px); scroll-snap-align:center; border-radius:140px 140px 16px 16px; }
+@keyframes entrance-breathe { from{scale:1} to{scale:1.045} }
+@keyframes invitation-pulse { 0%,100%{box-shadow:0 5px 25px #0005} 50%{box-shadow:0 5px 38px #f0cd6c55} }
+@keyframes gold-shine { 0%,55%{left:-60%} 85%,100%{left:150%} }
+@keyframes floral-drift { from{opacity:.14} to{opacity:.24} }
+@keyframes reveal-glow { 0%{box-shadow:0 0 0 0 #c8a35f66} 70%{box-shadow:0 0 0 18px #c8a35f00} 100%{box-shadow:0 16px 40px #68481921} }
+@keyframes date-emerge { from{opacity:0;transform:translateY(14px) scale(.94)} to{opacity:1;transform:none} }
+@media (prefers-reduced-motion:reduce) {
+  .entrance-door,.entrance-image,.entrance-shade,.event-image { transition:none!important; animation:none!important; }
+}

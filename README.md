@@ -61,9 +61,17 @@ npx tsc --noEmit
 alarms, then builds and validates the Cloudflare Worker artifact. Shell scripts
 must retain their executable file modes when checked out.
 
-## Hosting status
+## Hosting
 
-The existing `.openai/hosting.json` project identity is preserved. On 5 October
-2026 the Sites API returned `project_not_found` for that identity in the connected
-workspace. Deployment requires access to that existing project to be restored;
-no replacement project was registered.
+The current ChatGPT Site identity is stored in `.openai/hosting.json`.
+The invitation is published at https://thanesh-banu-invitation.s-thaneshvaran.chatgpt.site
+and initially available to its owner only.
+
+## Animation sequence
+
+Opening the invitation slides the two temple image panels apart, fades the cover,
+and starts the couple-name sequence. Scroll reveals lift and unfold event cards;
+floral imagery moves with scroll. Scratching or tapping the date fades the gold
+layer and briefly illuminates the revealed date. The optional personal gallery
+uses horizontal swipe and scroll snapping when enabled. Motion follows the
+visitor's reduced-motion preference.

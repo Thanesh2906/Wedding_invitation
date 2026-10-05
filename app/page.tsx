@@ -2,9 +2,10 @@
 
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, MotionConfig, useReducedMotion } from "framer-motion";
 import wedding from "../data/wedding.json";
 import ScratchDate from "./components/ScratchDate";
+import ParallaxImage from "./components/ParallaxImage";
 
 import { calculateCountdown, initialCountdown } from "./lib/countdown";
 type EventKey = "wedding" | "reception";
@@ -65,8 +66,8 @@ function EventCard({ eventKey, index }: { eventKey: EventKey; index: number }) {
     <motion.article
       className={`event-card ${isWedding ? "event-card-wine" : "event-card-ivory"}`}
       id={event.sectionId}
-      initial={{ opacity: 0, y: 45, scale: 0.98 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ opacity: 0, y: 65, scale: 0.94, rotateX: 6 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
       viewport={viewport}
       transition={{ duration: 0.8, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -7 }}
@@ -247,6 +248,7 @@ function MusicToggle() {
 export default function Home() {
   const [countdown, setCountdown] = useState(initialCountdown);
   const [opened, setOpened] = useState(false);
+  const [opening, setOpening] = useState(false);
   const invitationRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
 
@@ -256,29 +258,47 @@ export default function Home() {
     return () => window.clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    if (!opened) document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [opened]);
+
   return (
+    <MotionConfig reducedMotion="user">
     <main>
-      <section className={`entrance ${opened ? "entrance-opened" : ""}`} aria-labelledby="welcome-title">
+      {!opened && <motion.section className={`entrance ${opening ? "entrance-opening" : ""}`} aria-labelledby="welcome-title"
+        initial={false} animate={{ opacity: opening ? 0 : 1 }}
+        transition={{ duration: reduceMotion ? 0 : 0.45, delay: opening && !reduceMotion ? 1.15 : 0 }}
+        onAnimationComplete={() => {
+          if (!opening) return;
+          setOpened(true);
+          requestAnimationFrame(() => invitationRef.current?.focus({ preventScroll: true }));
+        }}>
+        <div className="entrance-doors" aria-hidden="true"><div className="entrance-door entrance-door-left" /><div className="entrance-door entrance-door-right" /></div>
         <img className="entrance-image" src="/images/temple.jpg" alt="" fetchPriority="high" />
         <div className="entrance-shade" />
-        <div className="entrance-frame">
+        <motion.div className="entrance-frame" initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: opening ? 0 : 1, y: opening ? -20 : 0 }}
+          transition={{ duration: reduceMotion ? 0 : 0.65 }}>
           <p className="eyebrow">With all our love</p>
           <h1 id="welcome-title">You are<br /><em>Invited</em></h1>
           <div className="entrance-divider" aria-hidden="true">✦</div>
           <p className="entrance-names">{wedding.couple.groom} <span>&</span> {wedding.couple.bride}</p>
           <p>To celebrate a beautiful beginning</p>
-          <button className="button button-gold open-invitation" onClick={() => {
-            setOpened(true);
+          <button disabled={opening} className="button button-gold open-invitation" onClick={() => {
+            window.scrollTo({ top: 0, behavior: "instant" });
+            setOpening(true);
             window.dispatchEvent(new Event("invitation-opened"));
-            requestAnimationFrame(() => {
-              invitationRef.current?.scrollIntoView({ behavior: reduceMotion ? "instant" : "smooth" });
-              invitationRef.current?.focus({ preventScroll: true });
-            });
-          }}>Open Invitation</button>
+            if (reduceMotion) {
+              setOpened(true);
+              requestAnimationFrame(() => invitationRef.current?.focus({ preventScroll: true }));
+            }
+          }}>{opening ? "Opening…" : "Open Invitation"}</button>
           <p className="entrance-hint">Tap to open our story</p>
-        </div>
-      </section>
-      <div ref={invitationRef} tabIndex={-1} className="invitation-content">
+        </motion.div>
+      </motion.section>}
+      <div ref={invitationRef} inert={!opened} tabIndex={-1} className={`invitation-content ${opening || opened ? "invitation-active" : ""}`}>
       <PetalField />
       <MusicToggle />
 
@@ -288,8 +308,8 @@ export default function Home() {
         ))}
       </motion.nav>
 
-      <header className="hero" id="top">
-        <img className="hero-floral" src="/images/lotus.jpg" alt="" />
+      <header key={opening ? "revealed" : "waiting"} className="hero" id="top">
+        <ParallaxImage className="hero-floral" src="/images/lotus.jpg" />
         <motion.div className="hero-glow hero-glow-one" animate={reduceMotion ? undefined : { x: [0, 24, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
         <motion.div className="hero-glow hero-glow-two" animate={reduceMotion ? undefined : { x: [0, -22, 0], y: [0, -24, 0], scale: [1, 1.08, 1] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} />
         <CornerFlourish side="left" />
@@ -326,7 +346,7 @@ export default function Home() {
       <ScratchDate date={wedding.events.wedding.shortDate} day={new Intl.DateTimeFormat("en", { weekday: "long", timeZone: "Asia/Kuala_Lumpur" }).format(new Date(wedding.events.wedding.isoStart))} />
 
       <motion.section className="countdown-section" id="countdown" aria-label="Wedding countdown" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={viewport} transition={{ duration: 0.8 }}>
-        <img className="countdown-backdrop" src="/images/lotus.jpg" alt="" loading="lazy" />
+        <ParallaxImage className="countdown-backdrop" src="/images/lotus.jpg" />
         <p className="eyebrow">Counting every beautiful moment</p>
         <h2>{countdown.started ? "The celebration has begun" : "Until we say ‘I do’"}</h2>
         {!countdown.started && <motion.div className="countdown-grid" initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={viewport} transition={{ delay: 0.2, duration: 0.7 }}>{(["days", "hours", "minutes", "seconds"] as const).map((unit) => <div className="countdown-cell" key={unit}><CountdownNumber value={countdown[unit]} /><span>{unit}</span></div>)}</motion.div>}
@@ -380,5 +400,6 @@ export default function Home() {
       </motion.footer>
       </div>
     </main>
+    </MotionConfig>
   );
 }

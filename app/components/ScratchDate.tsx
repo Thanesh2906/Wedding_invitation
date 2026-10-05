@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { PointerEvent } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 export default function ScratchDate({ date, day }: { date: string; day: string }) {
+  const reduced = useReducedMotion();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dragging = useRef(false);
   const previous = useRef<{ x: number; y: number } | null>(null);
@@ -57,20 +59,20 @@ export default function ScratchDate({ date, day }: { date: string; day: string }
   };
 
   return (
-    <section className="date-section" id="special-date" aria-labelledby="date-title">
+    <motion.section initial={{ opacity: 0, y: 35 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: reduced ? 0 : 0.8 }} className="date-section" id="special-date" aria-labelledby="date-title">
       <p className="eyebrow">A beautiful beginning</p>
       <h2 id="date-title">Our Special Date</h2>
       <p className="date-instruction">A little surprise, just for you.</p>
       <div className={`scratch-card ${revealed ? "is-revealed" : ""}`}>
         <div className="scratch-date" aria-hidden={!revealed}><span>{day}</span><strong>{date}</strong><span>{weddingTimeLabel}</span></div>
-        {!revealed && <canvas ref={canvasRef} aria-hidden="true" onPointerDown={(event) => {
+        <AnimatePresence>{!revealed && <motion.canvas key="scratch-layer" initial={{ opacity: 1 }} exit={{ opacity: 0, scale: reduced ? 1 : 1.04 }} transition={{ duration: reduced ? 0 : 0.65 }} ref={canvasRef} aria-hidden="true" onPointerDown={(event) => {
           dragging.current = true; previous.current = null;
           event.currentTarget.setPointerCapture(event.pointerId); scratch(event);
-        }} onPointerMove={scratch} onPointerUp={() => { dragging.current = false; previous.current = null; }} onPointerCancel={() => { dragging.current = false; previous.current = null; }} />}
+        }} onPointerMove={scratch} onPointerUp={() => { dragging.current = false; previous.current = null; }} onPointerCancel={() => { dragging.current = false; previous.current = null; }} />}</AnimatePresence>
       </div>
       <div className="reveal-status" aria-live="polite">{revealed ? `Save the date: ${day}, ${date}` : "Scratch the gold card with your finger, or tap below."}</div>
       {!revealed && <button className="button button-wine" onClick={() => setRevealed(true)}>Reveal our date</button>}
-    </section>
+    </motion.section>
   );
 }
 const weddingTimeLabel = "Save the date";
