@@ -291,3 +291,9 @@ footer>p { font-size:14px; line-height:1.6; }
   .hero .hero-date { font-size:14px; letter-spacing:.025em; }
 }
 @media (min-width:760px) { .hero-copy { padding:44px 32px; } }
+
+.music-player { position: fixed; bottom: 6rem; right: 1.25rem; z-index: 100; width: min(340px, calc(100vw - 2.5rem)); padding: 14px; border: 1px solid #b9914b; border-radius: 16px; background: #fff9ed; color: #4b291b; box-shadow: 0 12px 40px #0004; }
+.music-player-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; margin-bottom: 10px; }
+.music-player-heading button { background: transparent; border: 0; color: inherit; font-size: 26px; cursor: pointer; }
+.music-player iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 8px; }
+.music-player > a { display: inline-block; margin-top: 10px; font-size: 14px; text-decoration: underline; }

@@ -192,55 +192,15 @@ function CornerFlourish({ side }: { side: "left" | "right" }) {
 }
 
 function MusicToggle() {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const onPlay = () => setPlaying(true);
-    const onPause = () => setPlaying(false);
-    audio.addEventListener("play", onPlay);
-    audio.addEventListener("pause", onPause);
-
-    const tryPlay = () => { audio.play().catch(() => {}); };
-    window.addEventListener("invitation-opened", tryPlay);
-
-    return () => {
-      audio.removeEventListener("play", onPlay);
-      audio.removeEventListener("pause", onPause);
-      window.removeEventListener("invitation-opened", tryPlay);
-    };
-  }, []);
-
+  const [visible, setVisible] = useState(false);
   return (
     <>
-      <audio ref={audioRef} src={wedding.music.src} loop preload="none" />
-      <motion.button
-        type="button"
-        className="music-toggle"
-        aria-label={playing ? "Pause background music" : "Play background music"}
-        aria-pressed={playing}
-        onClick={() => {
-          const audio = audioRef.current;
-          if (!audio) return;
-          if (audio.paused) audio.play().catch(() => {}); else audio.pause();
-        }}
-        initial={{ opacity: 0, scale: 0.7 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.92 }}
-      >
-        <motion.span
-          className="music-disc"
-          animate={playing ? { rotate: 360 } : { rotate: 0 }}
-          transition={playing ? { duration: 6, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
-        >
-          ♪
-        </motion.span>
-      </motion.button>
+      {visible && <aside className="music-player" aria-label="Invitation music">
+        <div className="music-player-heading"><span>Sai Pallavi’s Intro · Amaran</span><button type="button" onClick={() => setVisible(false)} aria-label="Close music player">×</button></div>
+        <iframe title="Sai Pallavi’s Intro from Amaran — YouTube music player" src="https://www.youtube.com/embed/sPHRoZFnEkU?autoplay=1&loop=1&playlist=sPHRoZFnEkU&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+        <a href="https://youtu.be/sPHRoZFnEkU" target="_blank" rel="noopener noreferrer">Listen on YouTube</a>
+      </aside>}
+      <motion.button type="button" className="music-toggle" aria-label={visible ? "Close music player" : "Play invitation music"} aria-expanded={visible} onClick={() => setVisible(!visible)} initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, duration: 0.6 }} whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}><span className="music-disc">♪</span></motion.button>
     </>
   );
 }
