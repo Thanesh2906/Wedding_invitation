@@ -297,3 +297,20 @@ footer>p { font-size:14px; line-height:1.6; }
 .music-player-heading button { background: transparent; border: 0; color: inherit; font-size: 26px; cursor: pointer; }
 .music-player iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 8px; }
 .music-player > a { display: inline-block; margin-top: 10px; font-size: 14px; text-decoration: underline; }
+
+/* The invitation artwork frames the scratch date without cropping its ornaments. */
+.date-section { width: min(680px, 100%); min-height: 850px; margin: 45px auto; padding: 230px 100px 170px; background: #fff7e5 url('/images/special-date-background.webp') center / 100% 100% no-repeat; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.date-section h2 { font-size: clamp(30px, 5vw, 48px); color: #57351d; }
+.date-section .date-instruction { color: #624a32; }
+.date-section .scratch-card { width: 100%; flex-shrink: 0; box-shadow: 0 8px 25px #68481918; }
+.date-section .reveal-status { color: #624a32; max-width: 100%; }
+.date-section > .button { flex-shrink: 0; }
+@media (max-width: 600px) {
+  .date-section { min-height: 670px; margin: 24px auto; padding: 185px 14vw 125px; }
+  .date-section h2 { font-size: clamp(29px, 7.5vw, 40px); }
+  .date-section .eyebrow { font-size: 12px; letter-spacing: .12em; }
+  .date-section .scratch-card, .date-section .scratch-date { min-height: 150px; }
+  .date-section .scratch-date { padding: 20px 8px; gap: 10px; }
+  .date-section .scratch-date strong { font-size: clamp(22px, 6vw, 32px); }
+  .date-section .date-instruction, .date-section .reveal-status { font-size: 14px; line-height: 1.5; }
+}
