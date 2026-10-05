@@ -33,3 +33,37 @@ Update `data/wedding.json`. The page reads names, family information, event deta
 ```bash
 npm run build
 ```
+
+## Reference-inspired invitation
+
+The page opens with an illuminated temple entrance and an **Open Invitation** button.
+The invitation uses ivory and gold, followed by a scratch-to-reveal wedding date,
+floral countdown, and navy event cards. The scratch card supports touch and mouse;
+**Reveal our date** provides a keyboard-accessible alternative. Music starts when
+opening the invitation and can be paused using the floating music button.
+
+Decorative temple and lotus photographs are hosted locally. Attribution, source
+links, licence details, and adaptations are recorded in `public/images/credits.txt`
+and linked from the footer. These are decorative images, not venue photographs.
+
+The personal gallery is disabled until actual couple photos are supplied. Add
+photos at the paths listed in `data/wedding.json`, then set `gallery.enabled` to
+`true`. All family, event, map, calendar, RSVP and contact details are preserved.
+
+## Checks
+
+```bash
+npm test
+npx tsc --noEmit
+```
+
+`npm test` checks the Malaysia-time countdown, expiry behavior, and both calendar
+alarms, then builds and validates the Cloudflare Worker artifact. Shell scripts
+must retain their executable file modes when checked out.
+
+## Hosting status
+
+The existing `.openai/hosting.json` project identity is preserved. On 5 October
+2026 the Sites API returned `project_not_found` for that identity in the connected
+workspace. Deployment requires access to that existing project to be restored;
+no replacement project was registered.

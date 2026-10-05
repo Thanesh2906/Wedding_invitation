@@ -4,24 +4,11 @@ import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import wedding from "../data/wedding.json";
+import ScratchDate from "./components/ScratchDate";
 
-type Countdown = { days: number; hours: number; minutes: number; seconds: number; started: boolean };
+import { calculateCountdown, initialCountdown } from "./lib/countdown";
 type EventKey = "wedding" | "reception";
-
-const initialCountdown: Countdown = { days: 0, hours: 0, minutes: 0, seconds: 0, started: false };
 const viewport = { once: true, amount: 0.16 };
-
-function calculateCountdown(): Countdown {
-  const distance = new Date(wedding.events.wedding.isoStart).getTime() - Date.now();
-  if (distance <= 0) return { ...initialCountdown, started: true };
-  return {
-    days: Math.floor(distance / 86_400_000),
-    hours: Math.floor((distance / 3_600_000) % 24),
-    minutes: Math.floor((distance / 60_000) % 60),
-    seconds: Math.floor((distance / 1_000) % 60),
-    started: false,
-  };
-}
 
 function toWhatsAppLink(phone: string, message: string) {
   const digits = phone.replace(/\D/g, "");
@@ -66,7 +53,7 @@ function CalendarActions({ eventKey }: { eventKey: EventKey }) {
   return (
     <div className="action-row">
       <MotionButton className="button button-gold" href={event.googleCalendarUrl} external>Add to Google Calendar</MotionButton>
-      <MotionButton className="button button-ghost" href={event.icsFile} download>Download 3-day reminder</MotionButton>
+      <MotionButton className="button button-ghost" href={event.icsFile} download>Download Calendar</MotionButton>
     </div>
   );
 }
@@ -85,6 +72,7 @@ function EventCard({ eventKey, index }: { eventKey: EventKey; index: number }) {
       whileHover={{ y: -7 }}
     >
       <motion.div className="event-number" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 0.06, x: 0 }} viewport={viewport}>0{isWedding ? "1" : "2"}</motion.div>
+      <img className="event-image" src={isWedding ? "/images/golden-temple.jpg" : "/images/lotus.jpg"} alt="" loading="lazy" />
       <p className="eyebrow">{event.kicker}</p>
       <h2>{event.heading}</h2>
       {event.subheading && <p className="event-subheading">{event.subheading}</p>}
@@ -94,7 +82,7 @@ function EventCard({ eventKey, index }: { eventKey: EventKey; index: number }) {
       <p className="venue">{event.venue}</p>
       <p className="address">{event.addressLines.map((line) => <span key={line}>{line}<br /></span>)}</p>
       {event.afterText && <p className="after-text">{event.afterText}</p>}
-      <MotionButton className={`button ${isWedding ? "button-light" : "button-wine"}`} href={event.mapsUrl} external>See the route <span aria-hidden="true">↗</span></MotionButton>
+      <MotionButton className={`button ${isWedding ? "button-light" : "button-wine"}`} href={event.mapsUrl} external>View Location</MotionButton>
       <CalendarActions eventKey={eventKey} />
     </motion.article>
   );
@@ -216,16 +204,12 @@ function MusicToggle() {
     audio.addEventListener("pause", onPause);
 
     const tryPlay = () => { audio.play().catch(() => {}); };
-    tryPlay();
-
-    window.addEventListener("pointerdown", tryPlay, { once: true });
-    window.addEventListener("keydown", tryPlay, { once: true });
+    window.addEventListener("invitation-opened", tryPlay);
 
     return () => {
       audio.removeEventListener("play", onPlay);
       audio.removeEventListener("pause", onPause);
-      window.removeEventListener("pointerdown", tryPlay);
-      window.removeEventListener("keydown", tryPlay);
+      window.removeEventListener("invitation-opened", tryPlay);
     };
   }, []);
 
@@ -262,26 +246,50 @@ function MusicToggle() {
 
 export default function Home() {
   const [countdown, setCountdown] = useState(initialCountdown);
+  const [opened, setOpened] = useState(false);
+  const invitationRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    setCountdown(calculateCountdown());
-    const timer = window.setInterval(() => setCountdown(calculateCountdown()), 1000);
+    setCountdown(calculateCountdown(wedding.events.wedding.isoStart));
+    const timer = window.setInterval(() => setCountdown(calculateCountdown(wedding.events.wedding.isoStart)), 1000);
     return () => window.clearInterval(timer);
   }, []);
 
   return (
     <main>
+      <section className={`entrance ${opened ? "entrance-opened" : ""}`} aria-labelledby="welcome-title">
+        <img className="entrance-image" src="/images/temple.jpg" alt="" fetchPriority="high" />
+        <div className="entrance-shade" />
+        <div className="entrance-frame">
+          <p className="eyebrow">With all our love</p>
+          <h1 id="welcome-title">You are<br /><em>Invited</em></h1>
+          <div className="entrance-divider" aria-hidden="true">✦</div>
+          <p className="entrance-names">{wedding.couple.groom} <span>&</span> {wedding.couple.bride}</p>
+          <p>To celebrate a beautiful beginning</p>
+          <button className="button button-gold open-invitation" onClick={() => {
+            setOpened(true);
+            window.dispatchEvent(new Event("invitation-opened"));
+            requestAnimationFrame(() => {
+              invitationRef.current?.scrollIntoView({ behavior: reduceMotion ? "instant" : "smooth" });
+              invitationRef.current?.focus({ preventScroll: true });
+            });
+          }}>Open Invitation</button>
+          <p className="entrance-hint">Tap to open our story</p>
+        </div>
+      </section>
+      <div ref={invitationRef} tabIndex={-1} className="invitation-content">
       <PetalField />
       <MusicToggle />
 
-      <motion.nav className="floating-nav" aria-label="Invitation navigation" initial={{ opacity: 0, y: -24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
-        {[["Home", "#top"], ["Invitation", "#invitation"], ["Wedding", "#wedding"], ["Dinner", "#reception"], ["Gallery", "#gallery"], ["Contact", "#contact"]].map(([label, href]) => (
+      <motion.nav className={`floating-nav ${opened ? "nav-opened" : ""}`} aria-label="Invitation navigation" initial={{ opacity: 0, y: -24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
+        {[["Invitation", "#top"], ["Date", "#special-date"], ["Events", "#wedding"], ["RSVP", "#contact"]].map(([label, href]) => (
           <motion.a key={label} href={href} whileHover={{ y: -1 }} whileTap={{ scale: 0.94 }}>{label}</motion.a>
         ))}
       </motion.nav>
 
       <header className="hero" id="top">
+        <img className="hero-floral" src="/images/lotus.jpg" alt="" />
         <motion.div className="hero-glow hero-glow-one" animate={reduceMotion ? undefined : { x: [0, 24, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
         <motion.div className="hero-glow hero-glow-two" animate={reduceMotion ? undefined : { x: [0, -22, 0], y: [0, -24, 0], scale: [1, 1.08, 1] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} />
         <CornerFlourish side="left" />
@@ -289,14 +297,14 @@ export default function Home() {
         <motion.div className="ornament ornament-top" initial={{ opacity: 0, scale: 0, rotate: -90 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ type: "spring", delay: 0.25, duration: 1 }}>✦</motion.div>
         <motion.p className="hero-kicker" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.7 }}>Together with their families</motion.p>
         <motion.div className="monogram" aria-hidden="true" initial={{ opacity: 0, scale: 0.65, rotate: -18 }} animate={{ opacity: 1, scale: 1, rotate: -3 }} transition={{ type: "spring", stiffness: 150, damping: 13, delay: 0.65 }}>T<span>&</span>B</motion.div>
-        <motion.h1 initial="hidden" animate="show" variants={{ hidden: {}, show: { transition: { staggerChildren: 0.18, delayChildren: 0.8 } } }}>
+        <motion.h2 initial="hidden" animate="show" variants={{ hidden: {}, show: { transition: { staggerChildren: 0.18, delayChildren: 0.8 } } }}>
           <motion.span variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 0.9 } } }}>{wedding.couple.groom}</motion.span>
           <motion.em variants={{ hidden: { opacity: 0, scale: 0.5 }, show: { opacity: 1, scale: 1, transition: { duration: 0.55 } } }}>&</motion.em>
           <motion.span variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 0.9 } } }}>{wedding.couple.bride}</motion.span>
-        </motion.h1>
+        </motion.h2>
         <motion.p className="hero-date" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.45, duration: 0.8 }}>{wedding.events.wedding.shortDate}</motion.p>
         <motion.p className="hero-venue" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6, duration: 0.8 }}>{wedding.events.wedding.venue} · Johor Bahru</motion.p>
-        <motion.a href="#invitation" className="scroll-cue" aria-label="Read the invitation" initial={{ opacity: 0 }} animate={{ opacity: 0.8 }} transition={{ delay: 1.9 }} whileHover={{ opacity: 1 }}><span>Discover our story</span><motion.i animate={reduceMotion ? undefined : { y: [0, 6, 0] }} transition={{ duration: 1.8, repeat: Infinity }}>↓</motion.i></motion.a>
+        <motion.a href="#invitation" className="scroll-cue" aria-label="Read the invitation" initial={{ opacity: 0 }} animate={{ opacity: 0.8 }} transition={{ delay: 1.9 }} whileHover={{ opacity: 1 }}><span>With love, we invite you</span><motion.i animate={reduceMotion ? undefined : { y: [0, 6, 0] }} transition={{ duration: 1.8, repeat: Infinity }}>↓</motion.i></motion.a>
       </header>
 
       <section className="invitation paper-section" id="invitation">
@@ -315,14 +323,17 @@ export default function Home() {
         </motion.div>
       </section>
 
+      <ScratchDate date={wedding.events.wedding.shortDate} day={new Intl.DateTimeFormat("en", { weekday: "long", timeZone: "Asia/Kuala_Lumpur" }).format(new Date(wedding.events.wedding.isoStart))} />
+
       <motion.section className="countdown-section" id="countdown" aria-label="Wedding countdown" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={viewport} transition={{ duration: 0.8 }}>
+        <img className="countdown-backdrop" src="/images/lotus.jpg" alt="" loading="lazy" />
         <p className="eyebrow">Counting every beautiful moment</p>
         <h2>{countdown.started ? "The celebration has begun" : "Until we say ‘I do’"}</h2>
         {!countdown.started && <motion.div className="countdown-grid" initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={viewport} transition={{ delay: 0.2, duration: 0.7 }}>{(["days", "hours", "minutes", "seconds"] as const).map((unit) => <div className="countdown-cell" key={unit}><CountdownNumber value={countdown[unit]} /><span>{unit}</span></div>)}</motion.div>}
       </motion.section>
 
       <section className="events-section">
-        <Reveal className="section-heading"><p className="eyebrow">Save the dates</p><h2>Our Celebrations</h2><p>Two evenings, one beautiful beginning.</p></Reveal>
+        <Reveal className="section-heading"><p className="eyebrow">Save the dates</p><h2>Wedding Timeline</h2><p>Two celebrations. One beautiful beginning.</p></Reveal>
         <div className="events-grid"><EventCard eventKey="wedding" index={0} /><EventCard eventKey="reception" index={1} /></div>
       </section>
 
@@ -333,10 +344,10 @@ export default function Home() {
         <div className="family-grid">{(["groom", "bride"] as const).map((side, index) => <motion.article className="family-card" key={side} initial={{ opacity: 0, y: 35 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewport} transition={{ duration: 0.7, delay: index * 0.12 }} whileHover={{ y: -5 }}><p className="eyebrow">{side === "groom" ? "Groom’s family" : "Bride’s family"}</p><h3>{wedding.families[side].parents[0]}<br />{wedding.families[side].parents[1]}</h3><address>{wedding.families[side].addressLines.map((line) => <span key={line}>{line}<br /></span>)}</address></motion.article>)}</div>
       </section>
 
-      <section className="gallery-section" id={wedding.gallery.sectionId}>
+      {wedding.gallery.enabled && <section className="gallery-section" id={wedding.gallery.sectionId}>
         <Reveal className="section-heading"><p className="eyebrow">{wedding.gallery.kicker}</p><h2>{wedding.gallery.heading}</h2><p>{wedding.gallery.subheading}</p></Reveal>
         <div className="gallery-grid">{wedding.gallery.photos.map((photo, index) => <GalleryFrame key={photo.src} src={photo.src} alt={photo.alt} index={index} />)}</div>
-      </section>
+      </section>}
 
       <section className="info-section" id={wedding.thingsToKnow.sectionId}>
         <Reveal className="section-heading"><p className="eyebrow">{wedding.thingsToKnow.kicker}</p><h2>{wedding.thingsToKnow.heading}</h2></Reveal>
@@ -364,8 +375,10 @@ export default function Home() {
       <motion.footer initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={viewport} transition={{ duration: 0.8 }}>
         <motion.div className="monogram monogram-small" whileInView={{ rotate: [-3, 5, -3], scale: [1, 1.08, 1] }} viewport={viewport} transition={{ duration: 1.3 }}>T<span>&</span>B</motion.div>
         <h2>Thaneshvaran <em>&</em> Banu</h2><p>{wedding.hashtag}</p><p className="footer-note">Your presence is the greatest gift of all.</p>
+        <p className="footer-note footer-credit">Decorative imagery: <a href="/images/credits.txt" target="_blank" rel="noreferrer">Sources &amp; licences</a></p>
         <p className="footer-note footer-credit">Music: {wedding.music.title} — {wedding.music.credit}</p>
       </motion.footer>
+      </div>
     </main>
   );
 }

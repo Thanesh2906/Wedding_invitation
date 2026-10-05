@@ -1,13 +1,29 @@
 {
-  "couple": { "groom": "Thaneshvaran", "bride": "Banu" },
+  "couple": {
+    "groom": "Thaneshvaran",
+    "bride": "Banu"
+  },
   "families": {
     "groom": {
-      "parents": ["Late Mr. Subramaniam -", "Mdm. Uma Devi Family"],
-      "addressLines": ["No. 9, Jalan Njm 2/4,", "Taman Nusa Jaya Mas,", "81300 Johor Bahru, Johor."]
+      "parents": [
+        "Late Mr. Subramaniam -",
+        "Mdm. Uma Devi Family"
+      ],
+      "addressLines": [
+        "No. 9, Jalan Njm 2/4,",
+        "Taman Nusa Jaya Mas,",
+        "81300 Johor Bahru, Johor."
+      ]
     },
     "bride": {
-      "parents": ["Late Mr. Jeyendran PJM, PJK -", "Mdm. Selvy Family"],
-      "addressLines": ["TS 2345, Jalan Kampung R Arjunan,", "14300 Nibong Tebal, Pulau Pinang."]
+      "parents": [
+        "Late Mr. Jeyendran PJM, PJK -",
+        "Mdm. Selvy Family"
+      ],
+      "addressLines": [
+        "TS 2345, Jalan Kampung R Arjunan,",
+        "14300 Nibong Tebal, Pulau Pinang."
+      ]
     }
   },
   "events": {
@@ -21,7 +37,11 @@
       "displayTime": "7:30 PM – 9:00 PM",
       "isoStart": "2026-11-15T19:30:00+08:00",
       "venue": "Monet Garden By Diva",
-      "addressLines": ["No. 11, Jalan Bistari 12,", "Taman Industri Jaya,", "81300 Johor Bahru, Johor."],
+      "addressLines": [
+        "No. 11, Jalan Bistari 12,",
+        "Taman Industri Jaya,",
+        "81300 Johor Bahru, Johor."
+      ],
       "afterText": "and followed by dinner thereafter",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Monet%20Garden%20By%20Diva%2C%20No.%2011%2C%20Jalan%20Bistari%2012%2C%20Taman%20Industri%20Jaya%2C%2081300%20Johor%20Bahru%2C%20Johor",
       "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Thaneshvaran%20%26%20Banu%20%E2%80%94%20Wedding&dates=20261115T113000Z%2F20261115T130000Z&details=Wedding%20ceremony%2C%20followed%20by%20dinner.%20Please%20set%20a%20notification%203%20days%20before.&location=Monet%20Garden%20By%20Diva%2C%20No.%2011%2C%20Jalan%20Bistari%2012%2C%20Taman%20Industri%20Jaya%2C%2081300%20Johor%20Bahru%2C%20Johor",
@@ -37,7 +57,10 @@
       "displayTime": "7:31 PM onwards",
       "isoStart": "2026-11-21T19:31:00+08:00",
       "venue": "Dewan Mariamman Amman Temple Kalidonia",
-      "addressLines": ["Nibong Tebal,", "Pulau Pinang (Mainland)"],
+      "addressLines": [
+        "Nibong Tebal,",
+        "Pulau Pinang (Mainland)"
+      ],
       "afterText": "",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Dewan%20Mariamman%20Amman%20Temple%20Kalidonia%2C%20Nibong%20Tebal%2C%20Pulau%20Pinang%2C%20Malaysia",
       "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Thaneshvaran%20%26%20Banu%20%E2%80%94%20Wedding%20Reception&dates=20261121T113100Z%2F20261121T150000Z&details=Wedding%20Reception%20on%20behalf%20of%20Bride%27s%20Family.%20Please%20set%20a%20notification%203%20days%20before.&location=Dewan%20Mariamman%20Amman%20Temple%20Kalidonia%2C%20Nibong%20Tebal%2C%20Pulau%20Pinang%20%28Mainland%29",
@@ -45,8 +68,14 @@
     }
   },
   "contacts": {
-    "groomSide": ["016-757 5907", "017-891 2429"],
-    "brideSide": ["011-5310 5942", "010-460 4503"]
+    "groomSide": [
+      "016-757 5907",
+      "017-891 2429"
+    ],
+    "brideSide": [
+      "011-5310 5942",
+      "010-460 4503"
+    ]
   },
   "hashtag": "#ThaneshAndBanu2026",
   "music": {
@@ -60,23 +89,54 @@
     "heading": "Our Moments",
     "subheading": "A little glimpse into our journey together.",
     "photos": [
-      { "src": "/gallery/01.jpg", "alt": "Thaneshvaran and Banu" },
-      { "src": "/gallery/02.jpg", "alt": "Thaneshvaran and Banu" },
-      { "src": "/gallery/03.jpg", "alt": "Thaneshvaran and Banu" },
-      { "src": "/gallery/04.jpg", "alt": "Thaneshvaran and Banu" },
-      { "src": "/gallery/05.jpg", "alt": "Thaneshvaran and Banu" },
-      { "src": "/gallery/06.jpg", "alt": "Thaneshvaran and Banu" }
-    ]
+      {
+        "src": "/gallery/01.jpg",
+        "alt": "Thaneshvaran and Banu"
+      },
+      {
+        "src": "/gallery/02.jpg",
+        "alt": "Thaneshvaran and Banu"
+      },
+      {
+        "src": "/gallery/03.jpg",
+        "alt": "Thaneshvaran and Banu"
+      },
+      {
+        "src": "/gallery/04.jpg",
+        "alt": "Thaneshvaran and Banu"
+      },
+      {
+        "src": "/gallery/05.jpg",
+        "alt": "Thaneshvaran and Banu"
+      },
+      {
+        "src": "/gallery/06.jpg",
+        "alt": "Thaneshvaran and Banu"
+      }
+    ],
+    "enabled": false
   },
   "thingsToKnow": {
     "sectionId": "know",
     "kicker": "Before you arrive",
     "heading": "Good to Know",
     "items": [
-      { "title": "Dress code", "body": "Festive traditional or smart formal attire is most welcome — feel free to shine in your favourite colours." },
-      { "title": "RSVP", "body": "Kindly RSVP at your earliest by messaging either side on WhatsApp, so we can prepare a seat just for you." },
-      { "title": "Kids & plus-ones", "body": "Bringing your little ones or a plus-one? Just let us know beforehand so we can plan seating with you in mind." },
-      { "title": "Parking", "body": "Parking is available at the venue — do plan to arrive a little early so we can start the celebrations together." }
+      {
+        "title": "Dress code",
+        "body": "Festive traditional or smart formal attire is most welcome — feel free to shine in your favourite colours."
+      },
+      {
+        "title": "RSVP",
+        "body": "Kindly RSVP at your earliest by messaging either side on WhatsApp, so we can prepare a seat just for you."
+      },
+      {
+        "title": "Kids & plus-ones",
+        "body": "Bringing your little ones or a plus-one? Just let us know beforehand so we can plan seating with you in mind."
+      },
+      {
+        "title": "Parking",
+        "body": "Parking is available at the venue — do plan to arrive a little early so we can start the celebrations together."
+      }
     ]
   }
 }
