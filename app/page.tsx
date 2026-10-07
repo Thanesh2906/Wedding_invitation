@@ -217,14 +217,34 @@ export default function Home() {
     if (!opened || calendarPromptDismissed || reachedInvitationEnd) return;
     const marker = invitationEndRef.current;
     if (!marker) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
+    let frame = 0;
+    const checkEnd = () => {
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+      if (marker.getBoundingClientRect().top <= viewportHeight + 96) {
         setReachedInvitationEnd(true);
-        observer.disconnect();
       }
-    }, { threshold: 1 });
-    observer.observe(marker);
-    return () => observer.disconnect();
+    };
+    const scheduleCheck = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(checkEnd);
+    };
+    const observer = typeof IntersectionObserver !== "undefined"
+      ? new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) setReachedInvitationEnd(true);
+        }, { threshold: 0, rootMargin: "0px 0px 96px 0px" })
+      : null;
+    observer?.observe(marker);
+    window.addEventListener("scroll", scheduleCheck, { passive: true });
+    window.addEventListener("resize", scheduleCheck);
+    window.visualViewport?.addEventListener("resize", scheduleCheck);
+    scheduleCheck();
+    return () => {
+      cancelAnimationFrame(frame);
+      observer?.disconnect();
+      window.removeEventListener("scroll", scheduleCheck);
+      window.removeEventListener("resize", scheduleCheck);
+      window.visualViewport?.removeEventListener("resize", scheduleCheck);
+    };
   }, [opened, calendarPromptDismissed, reachedInvitationEnd]);
 
   return (
