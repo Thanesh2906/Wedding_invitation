@@ -75,3 +75,9 @@ floral imagery moves with scroll. Scratching or tapping the date fades the gold
 layer and briefly illuminates the revealed date. The optional personal gallery
 uses horizontal swipe and scroll snapping when enabled. Motion follows the
 visitor's reduced-motion preference.
+
+## Guest Google Calendar connection
+
+Guests can add both celebrations, or one event, after granting Google Calendar access through Google Identity Services. The browser calls Calendar API directly; access tokens are used only in memory and are never persisted. Events use Malaysia time and an explicit 1-day popup reminder. Stable IDs prevent duplicates; a repeat add refreshes the reminder only. Downloadable calendars also contain 1-day alarms.
+
+The public OAuth client ID is configured in `app/lib/google-calendar.ts`. In its Google Cloud project, enable Calendar API, authorize the production site's JavaScript origin, and configure the External consent audience for `calendar.events.owned`. Testing-mode access is limited to registered test users; public rollout may require Google verification. No client secret or API key is needed for this token flow. Test the consent popup and actual insertion using a Google account before inviting all guests.

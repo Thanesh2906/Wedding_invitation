@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { PointerEvent } from "react";
+import PetalField from "./PetalField";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 export default function ScratchDate({ date, day }: { date: string; day: string }) {
@@ -11,6 +12,14 @@ export default function ScratchDate({ date, day }: { date: string; day: string }
   const previous = useRef<{ x: number; y: number } | null>(null);
   const strokes = useRef(0);
   const [revealed, setRevealed] = useState(false);
+  const [celebrating, setCelebrating] = useState(false);
+
+  useEffect(() => {
+    if (!revealed || reduced) return;
+    setCelebrating(true);
+    const timer = window.setTimeout(() => setCelebrating(false), 4800);
+    return () => window.clearTimeout(timer);
+  }, [revealed, reduced]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -60,6 +69,7 @@ export default function ScratchDate({ date, day }: { date: string; day: string }
 
   return (
     <motion.section initial={{ opacity: 0, y: 35 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: reduced ? 0 : 0.8 }} className="date-section" id="special-date" aria-labelledby="date-title">
+      {celebrating && <PetalField celebration />}
       <p className="eyebrow">A beautiful beginning</p>
       <h2 id="date-title">Our Special Date</h2>
       <p className="date-instruction">A little surprise, just for you.</p>

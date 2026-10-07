@@ -17,4 +17,18 @@ ACTION:DISPLAY
 DESCRIPTION:Thaneshvaran & Banu's wedding reception is tomorrow
 END:VALARM
 END:VEVENT
+BEGIN:VEVENT
+UID:wedding-20261115@thaneshvaran-banu
+DTSTAMP:20260809T000000Z
+DTSTART:20261115T113000Z
+DTEND:20261115T130000Z
+SUMMARY:Thaneshvaran & Banu — Wedding
+DESCRIPTION:Wedding ceremony followed by dinner thereafter.
+LOCATION:Monet Garden by Diva\, No. 11\, Jalan Bistari 12\, Taman Industri Jaya\, 81300 Johor Bahru\, Johor.
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Thaneshvaran & Banu's wedding is tomorrow
+END:VALARM
+END:VEVENT
 END:VCALENDAR

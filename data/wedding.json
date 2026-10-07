@@ -34,9 +34,9 @@
       "subheading": "",
       "displayDate": "Sunday, 15 November 2026",
       "shortDate": "15 · November · 2026",
-      "displayTime": "7:30 PM – 9:00 PM",
+      "displayTime": "7:30 PM onwards",
       "isoStart": "2026-11-15T19:30:00+08:00",
-      "venue": "Monet Garden By Diva",
+      "venue": "Monet Garden by Diva",
       "addressLines": [
         "No. 11, Jalan Bistari 12,",
         "Taman Industri Jaya,",
@@ -44,7 +44,7 @@
       ],
       "afterText": "and followed by dinner thereafter",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Monet%20Garden%20By%20Diva%2C%20No.%2011%2C%20Jalan%20Bistari%2012%2C%20Taman%20Industri%20Jaya%2C%2081300%20Johor%20Bahru%2C%20Johor",
-      "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Thaneshvaran%20%26%20Banu%20%E2%80%94%20Wedding&dates=20261115T113000Z%2F20261115T130000Z&details=Wedding%20ceremony%2C%20followed%20by%20dinner.%20Please%20set%20a%20notification%203%20days%20before.&location=Monet%20Garden%20By%20Diva%2C%20No.%2011%2C%20Jalan%20Bistari%2012%2C%20Taman%20Industri%20Jaya%2C%2081300%20Johor%20Bahru%2C%20Johor",
+      "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Thaneshvaran%20%26%20Banu%20%E2%80%94%20Wedding&dates=20261115T113000Z%2F20261115T130000Z&details=Wedding%20ceremony%2C%20followed%20by%20dinner.%20Please%20set%20a%20notification%201%20day%20before.&location=Monet%20Garden%20by%20Diva%2C%20No.%2011%2C%20Jalan%20Bistari%2012%2C%20Taman%20Industri%20Jaya%2C%2081300%20Johor%20Bahru%2C%20Johor",
       "icsFile": "/calendar/thaneshvaran-banu-wedding.ics"
     },
     "reception": {
@@ -54,16 +54,16 @@
       "subheading": "On behalf of Bride’s Family",
       "displayDate": "Saturday, 21 November 2026",
       "shortDate": "21 · November · 2026",
-      "displayTime": "7:31 PM onwards",
-      "isoStart": "2026-11-21T19:31:00+08:00",
-      "venue": "Dewan Mariamman Amman Temple Kalidonia",
+      "displayTime": "7:30 PM onwards",
+      "isoStart": "2026-11-21T19:30:00+08:00",
+      "venue": "Dewan Mariamman Amman Temple",
       "addressLines": [
-        "Nibong Tebal,",
+        "Kalidonia, Nibong Tebal,",
         "Pulau Pinang (Mainland)"
       ],
       "afterText": "",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Dewan%20Mariamman%20Amman%20Temple%20Kalidonia%2C%20Nibong%20Tebal%2C%20Pulau%20Pinang%2C%20Malaysia",
-      "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Thaneshvaran%20%26%20Banu%20%E2%80%94%20Wedding%20Reception&dates=20261121T113100Z%2F20261121T150000Z&details=Wedding%20Reception%20on%20behalf%20of%20Bride%27s%20Family.%20Please%20set%20a%20notification%203%20days%20before.&location=Dewan%20Mariamman%20Amman%20Temple%20Kalidonia%2C%20Nibong%20Tebal%2C%20Pulau%20Pinang%20%28Mainland%29",
+      "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Thaneshvaran%20%26%20Banu%20%E2%80%94%20Wedding%20Reception&dates=20261121T113000Z%2F20261121T150000Z&details=Wedding%20Reception%20on%20behalf%20of%20Bride%27s%20Family.%20Please%20set%20a%20notification%201%20day%20before.&location=Dewan%20Mariamman%20Amman%20Temple%20Kalidonia%2C%20Nibong%20Tebal%2C%20Pulau%20Pinang%20%28Mainland%29",
       "icsFile": "/calendar/thaneshvaran-banu-reception.ics"
     }
   },
@@ -79,9 +79,9 @@
   },
   "hashtag": "#ThaneshAndBanu2026",
   "music": {
-    "src": "/audio/sai-pallavi-intro.mp3",
-    "title": "Sai Pallavi’s Intro (From Amaran)",
-    "credit": "G. V. Prakash Kumar"
+    "src": "/audio/wedding-song.mp3",
+    "title": "Wedding music",
+    "credit": ""
   },
   "gallery": {
     "sectionId": "gallery",

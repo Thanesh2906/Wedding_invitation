@@ -15,12 +15,12 @@ test('at and after the ceremony the countdown stops without negative values', ()
     assert.deepEqual(calculateCountdown(wedding.events.wedding.isoStart, time), { days: 0, hours: 0, minutes: 0, seconds: 0, started: true });
   }
 });
-test('both event calendars exist and include a three-day alarm', () => {
+test('both event calendars exist and include a one-day alarm', () => {
   for (const event of Object.values(wedding.events)) {
     const file = new URL(`../public${event.icsFile}`, import.meta.url);
     assert.ok(existsSync(file));
     const calendar = readFileSync(file, 'utf8');
-    assert.match(calendar, /TRIGGER:-P3D/);
+    assert.match(calendar, /TRIGGER:-P1D/);
     assert.ok(event.mapsUrl.startsWith('https://www.google.com/maps/'));
   }
 });
