@@ -22,7 +22,7 @@ export default function CalendarPrompt({ onDismiss }: { onDismiss: () => void })
     <p className="eyebrow">Save our special dates</p>
     <h2 id="calendar-prompt-title">Celebrate with us</h2>
     <p id="calendar-prompt-description">Add our wedding and reception to your calendar, with a reminder one day before each celebration.</p>
-    <div className="calendar-prompt-dates"><span><strong>15 Nov</strong>Wedding & dinner</span><span><strong>21 Nov</strong>Wedding reception</span></div>
+    <div className="calendar-prompt-dates"><span><strong>15 Nov</strong>Wedding</span><span><strong>21 Nov</strong>Wedding reception</span></div>
     <GoogleCalendarButton eventKeys={['wedding', 'reception']} combined />
     <div className="calendar-apple-option">
       <a className="button button-ghost" href={APPLE_CALENDAR_URL}>Add to Apple Calendar</a>
