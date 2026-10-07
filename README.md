@@ -30,9 +30,21 @@ Update `data/wedding.json`. The page reads names, family information, event deta
 
 ## Production build
 
+For the ChatGPT Sites / Cloudflare Worker deployment:
+
 ```bash
 npm run build
 ```
+
+For Vercel's Next.js deployment:
+
+```bash
+npm run build:vercel
+```
+
+`vercel.json` selects the Next.js build and `.next` output automatically. Keep
+the Vercel project root at the repository root. Node.js is pinned to the 22.x
+release line in `package.json`. The Sites build continues to produce `dist`.
 
 ## Reference-inspired invitation
 

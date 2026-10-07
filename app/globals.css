@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap');
+@import "tailwindcss";
 
 :root { --wine:#641b34; --wine-dark:#35101e; --gold:#c6a15b; --gold-light:#ead5a2; --ivory:#fbf6ec; --ink:#362a29; --font-serif:"Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif; --font-script:"URW Chancery L","Apple Chancery","Segoe Script",cursive; --font-sans:Arial,"Helvetica Neue",sans-serif; }
 * { box-sizing:border-box; }
